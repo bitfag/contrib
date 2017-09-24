@@ -1,0 +1,41 @@
+---
+- name: Clone cni repo
+  git:
+    repo: https://github.com/containernetworking/plugins.git
+    dest: /var/tmp/plugins
+
+- name: Clone sr-iov plugin repo
+  git:
+    repo: https://github.com/hustcat/sriov-cni.git
+    dest: /var/tmp/sriov-cni
+
+- name: Prepare cni bin directory
+  file:
+    path: /opt/cni/bin
+    state: directory
+    mode: 0755
+
+- name: Build plugins
+  command: ./build.sh
+  args:
+    chdir: /var/tmp/plugins
+    creates: /var/tmp/plugins/bin/sample
+
+- name: Move plugins to cni bin directory
+  shell: cp bin/* /opt/cni/bin/
+  args:
+    chdir: /var/tmp/plugins
+    creates: /opt/cni/bin/sample
+
+- name: Build sr-iov cni plugin
+  command: ./build
+  args:
+    chdir: /var/tmp/sriov-cni
+    creates: /var/tmp/sriov-cni/bin/sriov
+
+- name: Move sr-iov plugin to cni bin directory
+  shell: mv bin/* /opt/cni/bin/
+  args:
+    chdir: /var/tmp/sriov-cni
+    creates: /opt/cni/bin/sriov
+

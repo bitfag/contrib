@@ -1,0 +1,22 @@
+---
+- name: Check OS upgrade available
+  command: rpm-ostree upgrade --upgrade-unchanged-exit-77
+  register: check_result
+  ignore_errors: True
+
+- name: Upgrade atomic host
+  command: rpm-ostree upgrade
+  when: check_result.rc != 77
+  notify: reboot
+
+- name: Wait for ssh
+  wait_for_connection: timeout=900
+
+- name: Install sr-iov packages
+  command: rpm-ostree install git-core golang jq pciutils vim
+  args:
+    creates: /bin/jq
+  notify: reboot
+
+- name: Wait for ssh
+  wait_for_connection: timeout=900

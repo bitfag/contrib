@@ -134,3 +134,11 @@ etcd_client_port: '2379'
 # when the scheme vars above are set to "https" you need to set these to true!
 flannel_etcd_use_certs: true
 apiserver_etcd_use_certs: true
+
+# SR-IOV settings
+kubelet_additional_options:
+  - "--network-plugin=cni"
+enable_sriov: true
+sriov_master_iface: eth1
+sriov_subnet: 10.16.0.0/16
+sriov_gateway: 10.16.0.1

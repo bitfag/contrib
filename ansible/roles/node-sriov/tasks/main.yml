@@ -1,0 +1,10 @@
+---
+- name: Install SR-IOV reqs
+  include: install.yml
+  when: is_atomic
+
+- name: Build CNI plugins
+  include: build_plugin.yml
+
+- name: Install CNI config
+  include: cni_config.yml

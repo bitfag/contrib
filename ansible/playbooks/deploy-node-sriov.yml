@@ -1,0 +1,9 @@
+---
+- name: Deploy sriov cni on the nodes
+  hosts: nodes
+  become: yes
+  roles:
+    - node-sriov
+  tags:
+    - nodes
+

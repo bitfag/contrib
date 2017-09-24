@@ -47,6 +47,11 @@
 # launch addons, like dns
 - include: deploy-addons.yml
 
+# install sr-iov cni on the nodes
+- include: deploy-node-sriov.yml
+  when: enable_sriov
+  tags: sriov
+
 # install kubernetes on the nodes
 - include: deploy-node.yml
 

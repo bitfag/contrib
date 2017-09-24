@@ -1,0 +1,14 @@
+{
+    "name": "sriovnet",
+    "type": "sriov",
+    "master": "{{ sriov_master_iface }}",
+    "ipam": {
+        "type": "host-local",
+        "subnet": "{{ sriov_subnet }}",
+        "routes": [
+            { "dst": "0.0.0.0/0" }
+        ],
+        "gateway": "{{ sriov_gateway }}"
+    }
+}
+
