@@ -71,7 +71,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     when :fedora
       config.vm.box = "fedora/25-cloud-base"
     when :fedoraatomic
-      config.vm.box = "fedora/25-atomic-host"
+      config.vm.box = "fedora/26-atomic-host"
     when :coreos
       config.vm.box = "coreos-%s" % $coreos_update_channel
       if $coreos_image_version != "current"
@@ -91,7 +91,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     when :fedora
       config.vm.box = "fedora/25-cloud-base"
     when :fedoraatomic
-      config.vm.box = "fedora/25-atomic-host"
+      config.vm.box = "fedora/26-atomic-host"
     when :ubuntu14
       config.vm.box = "baremettle/ubuntu-14.04"
     when :ubuntu16
